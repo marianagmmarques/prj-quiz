@@ -42,9 +42,9 @@ public class QuizController {
     }
 
     @DeleteMapping("/{id}")
-    public @ResponseBody String apagarQuiz(@PathVariable Integer id) {
+    public @ResponseBody String apagar(@PathVariable Integer id) {
         qRepository.deleteById(id);
-        return "Ok ao apagar";
+        return "Apagado";
     }
 
     @GetMapping("/{id}")
