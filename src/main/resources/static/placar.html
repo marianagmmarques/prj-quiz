@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Raking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        body{
+            background-color: white;
+        }
+        tbody {
+            cursor: pointer;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 250px;
+        }
+
+        tr {
+            height: 100px;
+            background-color: #E0F8F7;
+            text-align: center;
+
+        }
+        </style>
+            <br>
+            <br>
+            <h2>Listar Raking</h2>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                        Jogador:
+                    </th>
+                    <th>
+                        Acertos:
+                    </th>
+                    <th>
+                        Erros:
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="listaPlacar">
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+    xhttp = new XMLHttpRequest();
+    var listaPlacar;
+    var api = "/api/placar/";
+
+    function listarPlacar(){
+        xhttp.open("GET", api);
+
+        xhttp.send();
+
+        xhttp.onload = function () {
+            listaPlacar = this.responseText;
+            listaPlacar = JSON.parse(listaPlacar);
+            texto = "";
+            
+            i = 0;
+            for(const p of listaPlacar){
+                texto += `<tr><td>${p.pessoa}</td><td>${Math.max(p.acertos)}</td><td>${p.erros}</td></tr>`;
+                i++;    
+        }
+
+            document.getElementById('listaPlacar').innerHTML = texto;
+    }
+
+}
+
+    listarPlacar();
+
+    </script>
+
+</body>
+</html>
